@@ -1,22 +1,11 @@
-# create-svelte
+## Reasoning
+I built this with svelte because svelte is best for small apps, and when combined with tailwind css, it allows for fast prototyping and development.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+using svelte also means that the code is relatively similar to vanilla html as .svelte is a superset of html. since svelte is a compiled framework, it does not need to ship a runtime with a virtual dom. this makes the app much smaller and faster than if i made it with react or other frameworks more suited to large projects.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
-```
-
-> Note: the `@next` is temporary
-
-## Developing
+## viewing
+the app is running on https://cat-app-svelte.vercel.app/
+## Running
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
@@ -34,7 +23,3 @@ To create a production version of your app:
 ```bash
 npm run build
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
