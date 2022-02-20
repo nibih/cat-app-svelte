@@ -17,13 +17,16 @@
     fetch(queryURL)
       .then((response) => response.json())
       .then((res) => {
+        //setting filtered data in case no more requests are made
         filtered = posts;
         filtered = posts.filter((value) =>
           value.name.toLowerCase().includes(searchTerm)
         );
+        //sort posts by name
         posts.sort(propComparator(`name`));
 
         if (res.length > 0) {
+          //get data and preapply existing search filter(initially it's empty)
           posts = [...posts, ...res];
           filtered = posts.filter((value) =>
             value.name.toLowerCase().includes(searchTerm)
@@ -52,7 +55,12 @@
 
 <div class="flex p-3 justify-between">
   <h1 class="text-3xl font-bold m-3">Cat Breeds</h1>
-  <input class="border border-slate-400 rounded-lg m-3 p-2" type="text" bind:value={searchTerm} on:input={handleChange} />
+  <input
+    class="border border-slate-400 rounded-lg m-3 p-2"
+    type="text"
+    bind:value={searchTerm}
+    on:input={handleChange}
+  />
 </div>
 
 <ul class="grid grid-cols-1 justify-items-center text-center p-3 bg-slate-300">
@@ -61,7 +69,9 @@
       class="w-full overflow-hidden rounded-lg shadow-lg sm:flex bg-white m-1 p-3"
       on:load={() => (readMore[i] = false)}
     >
+      <!-- stores readmore data in an array based on post index with initial value of false -->
       <li class="flex">
+        <!-- verifying if the cat has an image, else it sets it to empty -->
         <img
           src={post.image ? post.image.url : ""}
           alt={post.name}
@@ -73,8 +83,10 @@
           </h2>
           <h3 class="">{post.temperament}</h3>
           {#if readMore[i]}
+            <!-- added transition to detail to make it smoother -->
             <h3 class="italic" transition:slide|local>"{post.description}"</h3>
           {/if}
+          <!-- toggles readMore in the post index -->
           <button
             on:click={() => {
               readMore[i] = !readMore[i];
@@ -97,5 +109,6 @@
     That's all folks! ฅ(＾・ω・＾ฅ)
   </h1>
 {:else}
+  <!-- calls fetch when there is still more data and bottom of screen is visible -->
   <div use:inview={{}} on:change={handleChange} />
 {/if}
